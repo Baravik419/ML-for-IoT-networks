@@ -1,7 +1,11 @@
 import pandas as pd
-from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.model_selection import StratifiedKFold
 from data_import import IoT_data
+from imblearn.over_sampling import SMOTE
+from collections import Counter
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
 
 # Separating features and targets
 X = IoT_data.drop(columns=["type"])
@@ -60,3 +64,27 @@ for train_index, test_index in skf.split(X, y):
     X_test = X.iloc[test_index]
     y_train = y[train_index]
     y_test = y[test_index]
+
+    # Data scaling
+
+    scaler = StandardScaler()
+    X_train_scaled = scaler.fit_transform(X_train)
+    X_test_scaled = scaler.transform(X_test)
+
+    # Data balancing
+
+    smote = SMOTE(random_state=42)
+    X_train_balanced, y_train_balanced = smote.fit_resample(X_train_scaled, y_train)
+
+#print(Counter(y_train))
+#print(Counter(y_train_balanced))
+
+# First model – Random Forest
+
+Random_Forest_Model = RandomForestClassifier(random_state=42, verbose=1)
+Random_Forest_Model.fit(X_train_balanced, y_train_balanced) # Starting to learn
+
+y_pred = Random_Forest_Model.predict(X_test_scaled) # Creates prognosis
+accuracy = accuracy_score(y_test, y_pred)
+
+print(accuracy)
