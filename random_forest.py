@@ -11,9 +11,9 @@ y_pred = Random_Forest_Model.predict(X_test_scaled) # Creates prognosis
 accuracy = accuracy_score(y_test, y_pred)
 
 # Exporting
-joblib.dump(Random_Forest_Model, "Random_Forest/Random_Forest_Model.pkl")
-joblib.dump(scaler, "Random_Forest/RFM_scaler.pkl")
-joblib.dump(Label_Encoder, "Random_Forest/RFM_Label_Encoder.pkl")
-joblib.dump(X.columns.tolist(), "Random_Forest/RFM_X_columns.pkl")
+joblib.dump(Random_Forest_Model, "Random_Forest_SMOTE/Random_Forest_Model_SMOTE.pkl")
+joblib.dump(scaler, "Random_Forest_SMOTE/RFMS_scaler.pkl")
+joblib.dump(Label_Encoder, "Random_Forest_SMOTE/RFMS_Label_Encoder.pkl")
+joblib.dump(X.columns.tolist(), "Random_Forest_SMOTE/RFMS_X_columns.pkl")
 
 print(accuracy)
