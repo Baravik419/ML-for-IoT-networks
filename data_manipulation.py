@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.model_selection import StratifiedKFold, train_test_split
 from data_import import IoT_data
-#from imblearn.over_sampling import SMOTE
+from imblearn.over_sampling import SMOTE
 from collections import Counter
 
 # Separating features and targets
@@ -50,8 +50,8 @@ X = X.fillna(0)
 Label_Encoder = LabelEncoder()
 y = Label_Encoder.fit_transform(y)
 
-print(y[:10])
-print(Label_Encoder.classes_)
+#print(y[:10])
+#print(Label_Encoder.classes_)
 
 # Splitting the data into train and test sets
 
@@ -71,8 +71,11 @@ for train_index, test_index in skf.split(X, y):
 
     # Data balancing
 
-    #smote = SMOTE(random_state=42)
-    #X_train_balanced, y_train_balanced = smote.fit_resample(X_train_scaled, y_train)
+    smote = SMOTE(random_state=42)
+    X_train_balanced, y_train_balanced = smote.fit_resample(X_train_scaled, y_train)
 
-#print(Counter(y_train))
-#print(Counter(y_train_balanced))
+print("X_train_scaled: ",X_train_scaled.shape)
+print("X_test_scaled: ",X_test_scaled.shape)
+
+print("X_train_balanced: ",X_train_balanced.shape)
+print("y_train_balanced: ",len(y_train_balanced))
