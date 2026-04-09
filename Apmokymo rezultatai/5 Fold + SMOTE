@@ -1,0 +1,32 @@
+Parallel(n_jobs=1)]: Done  49 tasks      | elapsed: 56.0min
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed: 114.0min finished
+[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed:   43.0s
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:  1.4min finished
+[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed: 52.4min
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed: 104.5min finished
+[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed:   44.2s
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:  1.4min finished
+[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed: 50.7min
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed: 104.6min finished
+[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed:   37.3s
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:  1.4min finished
+[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed: 49.8min
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed: 102.5min finished
+[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed:   38.0s
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:  1.4min finished
+[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed: 51.4min
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed: 149.7min finished
+[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed:   42.4s
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:  1.4min finished
+
+All fold accuracies:  [0.44062410309098243, 0.4423933102892709, 0.44144215344128823, 0.4413853058745721, 0.44082576057990147]
+Mean accuracy:  0.441334126655203
+Best accuracy:  0.4423933102892709
+Best fold number:  2
+Traceback (most recent call last):
+  File "/Users/ervinborkovski/Library/CloudStorage/OneDrive-VilniausGediminotechnikosuniversitetas/University/Baigiamasis darbas/Realizacija/random_forest.py", line 68, in <module>
+    joblib.dump(results["best_model"], "Random_Forest_SMOTE/Random_Forest_Model_SMOTE.pkl")
+                ^^^^^^^^^^^^^^^^^
+KeyError: 'scaler'
+
+Process finished with exit code 1

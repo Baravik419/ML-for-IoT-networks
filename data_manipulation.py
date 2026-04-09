@@ -57,7 +57,7 @@ def prepare_data():
 
     return X, y, Label_Encoder
 
-def generate_folds(use_SMOTE=True):
+def generate_folds(use_smote=True):
     X, y, Label_Encoder = prepare_data()
 
     # Splitting the data into train and test sets
@@ -79,18 +79,18 @@ def generate_folds(use_SMOTE=True):
         X_test_scaled = scaler.transform(X_test)
 
         # Data balancing
-        if use_SMOTE:
+        if use_smote:
             smote = SMOTE(random_state=42)
             X_train_final, y_train_final = smote.fit_resample(X_train_scaled, y_train)
         else:
             X_train_final, y_train_final = X_train_scaled, y_train
 
         folds.append({
-            "fold_number: ": fold_number,
-            "X_train: ": X_train_final,
-            "y_train: ": y_train_final,
-            "X_test: ": X_test_scaled,
-            "y_test: ": y_test,
-            "scaler: ": scaler
+            "fold_number": fold_number,
+            "X_train": X_train_final,
+            "y_train": y_train_final,
+            "X_test": X_test_scaled,
+            "y_test": y_test,
+            "scaler": scaler
         })
     return folds, Label_Encoder, X.columns.tolist()
