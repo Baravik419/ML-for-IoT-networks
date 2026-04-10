@@ -4,9 +4,9 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, balanced_accuracy_score, classification_report, confusion_matrix
 import joblib
 
-from data_manipulation import generate_folds
+from data_preprocessing import generate_folds
 
-def train_model(use_smote=True):
+def train_model(use_smote=True, chosen_fold_number=None):
     folds, Label_Encoder, X_columns = generate_folds(use_smote=use_smote)
 
     accuracies = []
@@ -15,39 +15,39 @@ def train_model(use_smote=True):
     best_model = None
     best_scaler = None
     best_fold_number = None
+    best_y_test = None
+    best_y_pred = None
 
-    chosen_fold_number = 2
-    chosen_fold = None
+    if chosen_fold_number is None:
+        folds_to_run = folds
+    else:
+        folds_to_run = [fold for fold in folds if fold["fold_number"] == chosen_fold_number]
 
-    for fold in folds:
-        if fold["fold_number"] == chosen_fold_number:
-            chosen_fold = fold
-            break
+        if not folds_to_run:
+            raise ValueError(f"Fold number {chosen_fold_number} not found.")
 
-    if chosen_fold is None:
-        raise ValueError("Chosen fold was not found.")
+    for fold in folds_to_run:
+        fold_number = fold["fold_number"]
+        X_train = fold["X_train"]
+        y_train = fold["y_train"]
+        X_test = fold["X_test"]
+        y_test = fold["y_test"]
+        scaler = fold["scaler"]
 
-    fold_number = chosen_fold["fold_number"]
-    X_train = chosen_fold["X_train"]
-    y_train = chosen_fold["y_train"]
-    X_test = chosen_fold["X_test"]
-    y_test = chosen_fold["y_test"]
-    scaler = chosen_fold["scaler"]
+        Random_Forest_Model = RandomForestClassifier(random_state=42, verbose=1)
+        Random_Forest_Model.fit(X_train, y_train) # Starting to learn
 
-    Random_Forest_Model = RandomForestClassifier(random_state=42, verbose=1)
-    Random_Forest_Model.fit(X_train, y_train) # Starting to learn
+        y_pred = Random_Forest_Model.predict(X_test) # Creates prognosis
+        accuracy = accuracy_score(y_test, y_pred)
+        accuracies.append(accuracy)
 
-    y_pred = Random_Forest_Model.predict(X_test) # Creates prognosis
-    accuracy = accuracy_score(y_test, y_pred)
-    accuracies.append(accuracy)
-
-    if accuracy > best_accuracy:
-        best_accuracy = accuracy
-        best_model = Random_Forest_Model
-        best_scaler = scaler
-        best_fold_number = fold_number
-        best_y_test = y_test
-        best_y_pred = y_pred
+        if accuracy > best_accuracy:
+            best_accuracy = accuracy
+            best_model = Random_Forest_Model
+            best_scaler = scaler
+            best_fold_number = fold_number
+            best_y_test = y_test
+            best_y_pred = y_pred
 
     print("\nAll fold accuracies: ", accuracies)
     print("Mean accuracy: ", np.mean(accuracies))
@@ -68,10 +68,9 @@ def train_model(use_smote=True):
     }
 
 if __name__ == "__main__":
-    results = train_model(use_smote=True)
+    results = train_model(use_smote=True, chosen_fold_number=None)
 
     # Exporting
-
     os.makedirs("Random_Forest_SMOTE", exist_ok=True)
 
     joblib.dump(results["best_model"], "Random_Forest_SMOTE/Random_Forest_Model_SMOTE.pkl")
