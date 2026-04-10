@@ -1,0 +1,24 @@
+/usr/local/bin/python3.14 /Users/ervinborkovski/Library/CloudStorage/OneDrive-VilniausGediminotechnikosuniversitetas/University/Baigiamasis darbas/Realizacija/random_forest.py
+/Users/ervinborkovski/Library/CloudStorage/OneDrive-VilniausGediminotechnikosuniversitetas/University/Baigiamasis darbas/Realizacija/data_preprocessing.py:35: DtypeWarning: Columns (0: src_bytes) have mixed types. Specify dtype option on import or set low_memory=False.
+  IoT_network_data = pd.read_csv("IoT_network_data.csv")
+Total data preparation: 61.857704 s
+Total preprocessing: 62.040662 s
+Folds generation: 0.000021 s
+Total folds generation and balancing: 82.982202 s
+[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed:  2.0min
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:  4.0min finished
+Fold 1 learning time: 240.547339 s
+[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed:    1.6s
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:    3.2s finished
+Fold 1 prediction time: 3.305180 s
+
+All fold accuracies:  [0.9999941111866842]
+Mean accuracy:  0.9999941111866842
+Best accuracy:  0.9999941111866842
+Best fold number:  1
+Total training time: 326.982327 s
+
+ Best model from fold 1 saved!
+Total code running time: 327.556086 s
+
+Process finished with exit code 0

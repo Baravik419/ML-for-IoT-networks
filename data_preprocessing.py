@@ -1,8 +1,9 @@
+import time
+
 import pandas as pd
 from imblearn.over_sampling import SMOTE
 from sklearn.model_selection import StratifiedKFold
 from sklearn.preprocessing import LabelEncoder, StandardScaler
-
 
 # IoT_network_data = pd.read_csv("IoT_network_data.csv")
 
@@ -30,7 +31,7 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 
 # Begging data preprocessing
 def prepare_data():
-
+    start_total = time.perf_counter()
     IoT_network_data = pd.read_csv("IoT_network_data.csv")
 
     # Dropping uneccessary data
@@ -40,11 +41,11 @@ def prepare_data():
     X = IoT_network_data.drop(columns=["type"])
     y = IoT_network_data["type"]
 
-    # print(X.shape)
-    # print(y.shape)
-    # print(X.columns)
-    # print(y.head())
-    # print(X.dtypes)
+    #print(X.shape)
+    #print(y.shape)
+    #print(X.columns)
+    #print(y.head())
+    #print(X.dtypes)
 
     X["src_bytes"] = pd.to_numeric(X["src_bytes"], errors="coerce")
 
@@ -65,13 +66,28 @@ def prepare_data():
     y = pd.Series(Label_Encoder.fit_transform(y), name="type")
     y.to_csv("y.csv", index=False)
 
+    end_total = time.perf_counter()
+
+    print(f"Total data preparation: {end_total - start_total:1f} s")
+
     return X, y, Label_Encoder
 
 def generate_folds(use_smote=True):
+
+    start_total = time.perf_counter()
+
+    start_preprocessing = time.perf_counter()
     X, y, Label_Encoder = prepare_data()
+    end_preprocessing = time.perf_counter()
+
+    print(f"Total preprocessing: {end_preprocessing - start_preprocessing:1f} s")
 
     # Splitting the data into train and test sets
+    start_folds = time.perf_counter()
     skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+    end_folds = time.perf_counter()
+
+    print(f"Folds generation: {end_folds - start_folds:1f} s")
 
     folds = []
 
@@ -88,8 +104,11 @@ def generate_folds(use_smote=True):
 
         # Data balancing
         if use_smote:
+            start_smote = time.perf_counter()
             smote = SMOTE(random_state=42)
             X_train_final, y_train_final = smote.fit_resample(X_train_scaled, y_train)
+            end_smote = time.perf_counter()
+            print(f"SMOTE: {end_smote - start_smote:1f} s")
         else:
             X_train_final, y_train_final = X_train_scaled, y_train
 
@@ -101,7 +120,7 @@ def generate_folds(use_smote=True):
             "y_test": y_test,
             "scaler": scaler
         })
-    return folds, Label_Encoder, X.columns.tolist()
 
-prepare_data()
-generate_folds()
+    end_total = time.perf_counter()
+    print(f"Total folds generation and balancing: {end_total - start_total:1f} s")
+    return folds, Label_Encoder, X.columns.tolist()
