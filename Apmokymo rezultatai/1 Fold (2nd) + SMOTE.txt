@@ -1,0 +1,35 @@
+Best fold: 2
+Best accuracy: 0.442393
+Mean accuracy: 0.442393
+
+All fold accuracies:
+Fold 1: 0.442393
+
+Balanced accuracy: 0.503686
+
+Classification report:
+              precision    recall  f1-score   support
+
+    backdoor       0.57      0.45      0.50     49227
+        ddos       0.35      0.44      0.39     10798
+   injection       0.16      0.46      0.24     10064
+      normal       0.98      0.44      0.61    617395
+    password       0.43      0.41      0.42     28535
+  ransomware       0.03      0.35      0.06      3206
+    scanning       0.01      0.77      0.01       795
+         xss       0.00      0.70      0.01      1207
+
+    accuracy                           0.44    721227
+   macro avg       0.32      0.50      0.28    721227
+weighted avg       0.90      0.44      0.58    721227
+
+
+Confusion matrix:
+[[ 21943    497   2006   2326   1110   2256   5871  13218]
+ [    58   4725     25    329    143    350   1556   3612]
+ [   390     82   4649    542    254    543   1166   2438]
+ [ 15430   7616  20754 273346  14121  28435  79211 178482]
+ [   518    435    650   1915  11814    941   3558   8704]
+ [    92     39    143    218     86   1125    479   1024]
+ [    12      0      3     40     15     13    614     98]
+ [    23     34     28     98     33     69     72    850]]
