@@ -42,11 +42,11 @@ def prepare_data():
     X = IoT_network_data.drop(columns=["type"])
     y = IoT_network_data["type"]
 
-    # print(X.shape)
-    # print(y.shape)
-    print(X.columns)
-    # print(y.head())
-    # print(X.dtypes)
+    #print(X.shape)
+    #print(y.shape)
+    #print(X.columns)
+    #print(y.head())
+    #print(X.dtypes)
 
     X["src_bytes"] = pd.to_numeric(X["src_bytes"], errors="coerce")
 

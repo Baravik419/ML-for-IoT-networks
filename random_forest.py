@@ -1,5 +1,6 @@
 import os
 import numpy as np
+import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, balanced_accuracy_score, classification_report, confusion_matrix
 import joblib
@@ -127,6 +128,15 @@ if __name__ == "__main__":
     report_text.append("Confusion matrix:")
     report_text.append(str(confusion_matrix(results["best_y_test"], results["best_y_pred"])))
     report_text.append("")
+
+    report_text.append("Feature importance:")
+    feature_importance = pd.DataFrame({
+        "feature": results["X_columns"],
+        "importance": results["best_model"].feature_importances_
+    }).sort_values("importance", ascending=False)
+    report_text.append(feature_importance.to_string(index=False))
+    report_text.append("")
+
 
     with open("Random_Forest (1 fold)/RFMS_metrics.txt", "w", encoding="utf-8") as f:
         f.write("\n".join(report_text))
