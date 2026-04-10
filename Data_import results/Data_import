@@ -1,0 +1,38 @@
+(3606134, 22)
+Index(['date', 'time', 'fridge_temperature', 'temp_condition', 'label', 'type',
+       'device_type', 'door_state', 'sphone_signal', 'latitude', 'longitude',
+       'FC1_Read_Input_Register', 'FC2_Read_Discrete_Value',
+       'FC3_Read_Holding_Register', 'FC4_Read_Coil', 'motion_status',
+       'light_status', 'current_temperature', 'thermostat_status',
+       'temperature', 'pressure', 'humidity'],
+      dtype='str')
+        date            time  ...  pressure humidity
+0  31-Mar-19     12:36:52     ...       NaN      NaN
+1  31-Mar-19     12:36:53     ...       NaN      NaN
+2  31-Mar-19     12:36:54     ...       NaN      NaN
+3  31-Mar-19     12:36:55     ...       NaN      NaN
+4  31-Mar-19     12:36:56     ...       NaN      NaN
+
+[5 rows x 22 columns]
+(22339021, 47)
+Index(['ts', 'src_ip', 'src_port', 'dst_ip', 'dst_port', 'proto', 'service',
+       'duration', 'src_bytes', 'dst_bytes', 'conn_state', 'missed_bytes',
+       'src_pkts', 'src_ip_bytes', 'dst_pkts', 'dst_ip_bytes', 'dns_query',
+       'dns_qclass', 'dns_qtype', 'dns_rcode', 'dns_AA', 'dns_RD', 'dns_RA',
+       'dns_rejected', 'ssl_version', 'ssl_cipher', 'ssl_resumed',
+       'ssl_established', 'ssl_subject', 'ssl_issuer', 'http_trans_depth',
+       'http_method', 'http_uri', 'http_referrer', 'http_version',
+       'http_request_body_len', 'http_response_body_len', 'http_status_code',
+       'http_user_agent', 'http_orig_mime_types', 'http_resp_mime_types',
+       'weird_name', 'weird_addl', 'weird_notice', 'label', 'type', 'uid'],
+      dtype='str')
+           ts         src_ip  src_port  ... label    type  uid
+0  1554198358    3.122.49.24      1883  ...     0  normal  NaN
+1  1554198358   192.168.1.79     47260  ...     0  normal  NaN
+2  1554198359  192.168.1.152      1880  ...     0  normal  NaN
+3  1554198359  192.168.1.152     34296  ...     0  normal  NaN
+4  1554198362  192.168.1.152     46608  ...     0  normal  NaN
+
+[5 rows x 47 columns]
+
+Process finished with exit code 0
