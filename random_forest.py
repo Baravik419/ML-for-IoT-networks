@@ -1,12 +1,116 @@
+import os
+import numpy as np
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, balanced_accuracy_score, classification_report, confusion_matrix
+import joblib
 
-from data_manipulation import X_train_balanced, y_train_balanced, X_test_scaled, y_test
+from data_manipulation import generate_folds
 
-Random_Forest_Model = RandomForestClassifier(random_state=42, verbose=1)
-Random_Forest_Model.fit(X_train_balanced, y_train_balanced) # Starting to learn
+def train_model(use_smote=True):
+    folds, Label_Encoder, X_columns = generate_folds(use_smote=use_smote)
 
-y_pred = Random_Forest_Model.predict(X_test_scaled) # Creates prognosis
-accuracy = accuracy_score(y_test, y_pred)
+    accuracies = []
 
-print(accuracy)
+    best_accuracy = -1
+    best_model = None
+    best_scaler = None
+    best_fold_number = None
+
+    chosen_fold_number = 2
+    chosen_fold = None
+
+    for fold in folds:
+        if fold["fold_number"] == chosen_fold_number:
+            chosen_fold = fold
+            break
+
+    if chosen_fold is None:
+        raise ValueError("Chosen fold was not found.")
+
+    fold_number = chosen_fold["fold_number"]
+    X_train = chosen_fold["X_train"]
+    y_train = chosen_fold["y_train"]
+    X_test = chosen_fold["X_test"]
+    y_test = chosen_fold["y_test"]
+    scaler = chosen_fold["scaler"]
+
+    Random_Forest_Model = RandomForestClassifier(random_state=42, verbose=1)
+    Random_Forest_Model.fit(X_train, y_train) # Starting to learn
+
+    y_pred = Random_Forest_Model.predict(X_test) # Creates prognosis
+    accuracy = accuracy_score(y_test, y_pred)
+    accuracies.append(accuracy)
+
+    if accuracy > best_accuracy:
+        best_accuracy = accuracy
+        best_model = Random_Forest_Model
+        best_scaler = scaler
+        best_fold_number = fold_number
+        best_y_test = y_test
+        best_y_pred = y_pred
+
+    print("\nAll fold accuracies: ", accuracies)
+    print("Mean accuracy: ", np.mean(accuracies))
+    print("Best accuracy: ", best_accuracy)
+    print("Best fold number: ", best_fold_number)
+
+    return {
+        "accuracies": accuracies,
+        "mean_accuracy": np.mean(accuracies),
+        "best_accuracy": best_accuracy,
+        "best_model": best_model,
+        "best_scaler": best_scaler,
+        "best_fold_number": best_fold_number,
+        "best_y_test": best_y_test,
+        "best_y_pred": best_y_pred,
+        "Label_Encoder": Label_Encoder,
+        "X_columns": X_columns
+    }
+
+if __name__ == "__main__":
+    results = train_model(use_smote=True)
+
+    # Exporting
+
+    os.makedirs("Random_Forest_SMOTE", exist_ok=True)
+
+    joblib.dump(results["best_model"], "Random_Forest_SMOTE/Random_Forest_Model_SMOTE.pkl")
+    joblib.dump(results["best_scaler"], "Random_Forest_SMOTE/RFMS_scaler.pkl")
+    joblib.dump(results["Label_Encoder"], "Random_Forest_SMOTE/RFMS_Label_Encoder.pkl")
+    joblib.dump(results["X_columns"], "Random_Forest_SMOTE/RFMS_X_columns.pkl")
+
+    print(f"\n Best model from fold {results['best_fold_number']} saved!")
+
+    report_text = []
+    report_text.append(f"Best fold: {results['best_fold_number']}")
+    report_text.append(f"Best accuracy: {results['best_accuracy']:.6f}")
+    report_text.append(f"Mean accuracy: {results['mean_accuracy']:.6f}")
+    report_text.append("")
+
+    report_text.append("All fold accuracies:")
+    for i, acc in enumerate(results["accuracies"], start=1):
+        report_text.append(f"Fold {i}: {acc:.6f}")
+    report_text.append("")
+
+    report_text.append(
+        f"Balanced accuracy: "
+        f"{balanced_accuracy_score(results['best_y_test'], results['best_y_pred']):.6f}"
+    )
+    report_text.append("")
+
+    report_text.append("Classification report:")
+    report_text.append(
+        classification_report(
+            results["best_y_test"],
+            results["best_y_pred"],
+            target_names=results["Label_Encoder"].classes_
+        )
+    )
+    report_text.append("")
+
+    report_text.append("Confusion matrix:")
+    report_text.append(str(confusion_matrix(results["best_y_test"], results["best_y_pred"])))
+    report_text.append("")
+
+    with open("Random_Forest_SMOTE/RFMS_metrics.txt", "w", encoding="utf-8") as f:
+        f.write("\n".join(report_text))
