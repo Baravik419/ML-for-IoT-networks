@@ -72,7 +72,7 @@ def prepare_data():
 
     return X, y, Label_Encoder
 
-def generate_folds(use_smote=True):
+def generate_folds(use_smote=True, chosen_fold_number=None):
 
     start_total = time.perf_counter()
 
@@ -92,6 +92,10 @@ def generate_folds(use_smote=True):
     folds = []
 
     for fold_number, (train_index, test_index) in enumerate(skf.split(X, y), start=1):
+
+        if chosen_fold_number is not None and fold_number != chosen_fold_number:
+            continue
+
         X_train = X.iloc[train_index]
         X_test = X.iloc[test_index]
         y_train = y[train_index]
@@ -108,6 +112,8 @@ def generate_folds(use_smote=True):
             smote = SMOTE(random_state=42)
             X_train_final, y_train_final = smote.fit_resample(X_train_scaled, y_train)
             end_smote = time.perf_counter()
+            print(pd.Series(y_train).value_counts().sort_index())
+            print(pd.Series(y_train_final).value_counts().sort_index())
             print(f"SMOTE: {end_smote - start_smote:1f} s")
         else:
             X_train_final, y_train_final = X_train_scaled, y_train

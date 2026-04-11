@@ -12,7 +12,7 @@ def train_model(use_smote=True, chosen_fold_number=None):
 
     start_total = time.perf_counter()
 
-    folds, Label_Encoder, X_columns = generate_folds(use_smote=use_smote)
+    folds, Label_Encoder, X_columns = generate_folds(use_smote=use_smote, chosen_fold_number=chosen_fold_number)
 
     accuracies = []
 
@@ -86,7 +86,7 @@ if __name__ == "__main__":
 
     start_total = time.perf_counter()
 
-    results = train_model(use_smote=True, chosen_fold_number=None)
+    results = train_model(use_smote=True, chosen_fold_number=3)
 
     # Exporting
     os.makedirs("Random_Forest_SMOTE (5 fold)", exist_ok=True)
