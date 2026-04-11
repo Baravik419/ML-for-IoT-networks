@@ -22,9 +22,9 @@ Weather["device_type"] = "weather"
 # Joining all the IoT data frames
 IoT_data = pd.concat([Fridge, Garage_Door, Gps_Tracker, Modbus, Motion_Light, Thermostat, Weather], ignore_index=True)
 
-print(IoT_data.shape)
-print(IoT_data.columns)
-print(IoT_data.head())
+#print(IoT_data.shape)
+#print(IoT_data.columns)
+#print(IoT_data.head())
 
 # Converting date and time to timestamp
 
@@ -38,9 +38,9 @@ IoT_data["ts"] = (
 # Importing the network dataset from 23 csv files to pandas data frame
 Network_data = pd.concat([pd.read_csv(f, low_memory=False) for f in glob.glob("ToN_IoT dataset (Network only)/Network_dataset_*.csv")], ignore_index=True)
 
-print(Network_data.shape)
-print(Network_data.columns)
-print(Network_data.head())
+#print(Network_data.shape)
+#print(Network_data.columns)
+#print(Network_data.head())
 
 # Merging the IoT and Network data frames
 keys = ["ts", "label", "type"]
@@ -51,8 +51,8 @@ IoT_network_data = Network_data.merge(
     how="inner"
 )
 
-print(IoT_network_data.shape)
-print(IoT_network_data.columns)
-print(IoT_network_data.head())
+#print(IoT_network_data.shape)
+#print(IoT_network_data.columns)
+#print(IoT_network_data.head())
 
 IoT_network_data.to_csv("IoT_network_data.csv", index=False)
