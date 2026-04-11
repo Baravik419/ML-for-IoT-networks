@@ -1,5 +1,6 @@
 import os
 import numpy as np
+import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, balanced_accuracy_score, classification_report, confusion_matrix
 import joblib
@@ -85,15 +86,15 @@ if __name__ == "__main__":
 
     start_total = time.perf_counter()
 
-    results = train_model(use_smote=False, chosen_fold_number=1)
+    results = train_model(use_smote=True, chosen_fold_number=None)
 
     # Exporting
-    os.makedirs("Random_Forest (5 fold)", exist_ok=True)
+    os.makedirs("Random_Forest_SMOTE (5 fold)", exist_ok=True)
 
-    joblib.dump(results["best_model"], "Random_Forest (5 fold)/Random_Forest_Model_SMOTE.pkl")
-    joblib.dump(results["best_scaler"], "Random_Forest (5 fold)/RFMS_scaler.pkl")
-    joblib.dump(results["Label_Encoder"], "Random_Forest (5 fold)/RFMS_Label_Encoder.pkl")
-    joblib.dump(results["X_columns"], "Random_Forest (5 fold)/RFMS_X_columns.pkl")
+    joblib.dump(results["best_model"], "Random_Forest_SMOTE (5 fold)/Random_Forest_Model_SMOTE.pkl")
+    joblib.dump(results["best_scaler"], "Random_Forest_SMOTE (5 fold)/RFMS_scaler.pkl")
+    joblib.dump(results["Label_Encoder"], "Random_Forest_SMOTE (5 fold)/RFMS_Label_Encoder.pkl")
+    joblib.dump(results["X_columns"], "Random_Forest_SMOTE (5 fold)/RFMS_X_columns.pkl")
 
     print(f"\nBest model from fold {results['best_fold_number']} saved!")
 
@@ -128,7 +129,16 @@ if __name__ == "__main__":
     report_text.append(str(confusion_matrix(results["best_y_test"], results["best_y_pred"])))
     report_text.append("")
 
-    with open("Random_Forest (1 fold)/RFMS_metrics.txt", "w", encoding="utf-8") as f:
+    report_text.append("Feature importance:")
+    feature_importance = pd.DataFrame({
+        "feature": results["X_columns"],
+        "importance": results["best_model"].feature_importances_
+    }).sort_values("importance", ascending=False)
+    report_text.append(feature_importance.to_string(index=False))
+    report_text.append("")
+
+
+    with open("Random_Forest_SMOTE (5 fold)/RFMS_metrics.txt", "w", encoding="utf-8") as f:
         f.write("\n".join(report_text))
 
     end_total = time.perf_counter()
