@@ -5,7 +5,6 @@ from imblearn.over_sampling import SMOTE
 from sklearn.model_selection import StratifiedKFold
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 
-
 # IoT_network_data = pd.read_csv("IoT_network_data.csv")
 
 # Counting how many null values
