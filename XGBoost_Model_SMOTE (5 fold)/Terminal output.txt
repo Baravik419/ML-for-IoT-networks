@@ -1,0 +1,128 @@
+/Users/ervinborkovski/PycharmProjects/IDS-for-IoT-networks/.venv/bin/python /Users/ervinborkovski/PycharmProjects/IDS-for-IoT-networks/xgboost_model.py
+/Users/ervinborkovski/PycharmProjects/IDS-for-IoT-networks/data_preprocessing.py:35: DtypeWarning: Columns (0: src_bytes) have mixed types. Specify dtype option on import or set low_memory=False.
+  IoT_network_data = pd.read_csv("IoT_network_data.csv")
+Total data preparation: 62.561083 s
+Total preprocessing: 62.750857 s
+type
+0     199980
+1    1392848
+2     153081
+3     200303
+4     663488
+5      45576
+6      61737
+Name: count, dtype: int64
+type
+0    1392848
+1    1392848
+2    1392848
+3    1392848
+4    1392848
+5    1392848
+6    1392848
+Name: count, dtype: int64
+SMOTE: 567.844029 s
+type
+0     199980
+1    1392848
+2     153082
+3     200303
+4     663487
+5      45576
+6      61737
+Name: count, dtype: int64
+type
+0    1392848
+1    1392848
+2    1392848
+3    1392848
+4    1392848
+5    1392848
+6    1392848
+Name: count, dtype: int64
+SMOTE: 571.588588 s
+type
+0     199980
+1    1392848
+2     153082
+3     200303
+4     663487
+5      45576
+6      61738
+Name: count, dtype: int64
+type
+0    1392848
+1    1392848
+2    1392848
+3    1392848
+4    1392848
+5    1392848
+6    1392848
+Name: count, dtype: int64
+SMOTE: 577.948515 s
+type
+0     199980
+1    1392848
+2     153082
+3     200303
+4     663487
+5      45576
+6      61738
+Name: count, dtype: int64
+type
+0    1392848
+1    1392848
+2    1392848
+3    1392848
+4    1392848
+5    1392848
+6    1392848
+Name: count, dtype: int64
+SMOTE: 586.884648 s
+type
+0     199980
+1    1392848
+2     153081
+3     200304
+4     663487
+5      45576
+6      61738
+Name: count, dtype: int64
+type
+0    1392848
+1    1392848
+2    1392848
+3    1392848
+4    1392848
+5    1392848
+6    1392848
+Name: count, dtype: int64
+SMOTE: 622.372764 s
+Total folds generation: 2951.973374 s
+Total folds generation and balancing: 3014.724278 s
+[21:17:15] INFO: /Users/runner/work/xgboost/xgboost/src/data/iterative_dmatrix.cc:56: Finished constructing the `IterativeDMatrix`: (9749936, 44, 428997184).
+Fold 1 learning time: 348.052554 s
+Fold 1 prediction time: 2.849935 s
+[21:23:06] INFO: /Users/runner/work/xgboost/xgboost/src/data/iterative_dmatrix.cc:56: Finished constructing the `IterativeDMatrix`: (9749936, 44, 428997184).
+Fold 2 learning time: 349.287495 s
+Fold 2 prediction time: 2.916427 s
+[21:28:59] INFO: /Users/runner/work/xgboost/xgboost/src/data/iterative_dmatrix.cc:56: Finished constructing the `IterativeDMatrix`: (9749936, 44, 428997184).
+Fold 3 learning time: 347.433040 s
+Fold 3 prediction time: 2.806781 s
+[21:34:50] INFO: /Users/runner/work/xgboost/xgboost/src/data/iterative_dmatrix.cc:56: Finished constructing the `IterativeDMatrix`: (9749936, 44, 428997184).
+Fold 4 learning time: 354.607601 s
+Fold 4 prediction time: 2.990513 s
+[21:40:47] INFO: /Users/runner/work/xgboost/xgboost/src/data/iterative_dmatrix.cc:56: Finished constructing the `IterativeDMatrix`: (9749936, 44, 428997184).
+Fold 5 learning time: 347.093193 s
+Fold 5 prediction time: 2.799710 s
+
+All fold accuracies:  [0.9999955833900132, 0.9999896945766974, 0.999995583383511, 0.9999941111780146, 0.999995583383511]
+Mean accuracy:  0.9999941111823496
+Best accuracy:  0.9999955833900132
+Best fold number:  1
+Total training time: 4775.783335 s
+
+Best model from fold 1 saved!
+Total code running time: 4783.212545 s
+
+Process finished with exit code 0

@@ -86,7 +86,6 @@ def generate_folds(use_smote=True, chosen_fold_number=None):
     skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
 
     folds = []
-    start_folds = time.perf_counter()
 
     for fold_number, (train_index, test_index) in enumerate(skf.split(X, y), start=1):
 
@@ -132,9 +131,6 @@ def generate_folds(use_smote=True, chosen_fold_number=None):
             "y_test": y_test,
             "scaler": scaler
         })
-
-    end_folds = time.perf_counter()
-    print(f"Total folds generation: {end_folds - start_folds:1f} s")
 
     end_total = time.perf_counter()
     print(f"Total folds generation and balancing: {end_total - start_total:1f} s")

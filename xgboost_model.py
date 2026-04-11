@@ -22,6 +22,7 @@ def train_model(use_smote=True, chosen_fold_number=None):
     best_fold_number = None
     best_y_test = None
     best_y_pred = None
+    best_y_probability = None
 
     if chosen_fold_number is None:
         folds_to_run = folds
@@ -59,6 +60,7 @@ def train_model(use_smote=True, chosen_fold_number=None):
 
         start_prediction = time.perf_counter()
         y_pred = XGBoost_Model.predict(X_test) # Creates prognosis
+        y_probability = XGBoost_Model.predict_proba(X_test)
         accuracy = accuracy_score(y_test, y_pred)
         end_prediction = time.perf_counter()
         print(f"Fold {fold_number} prediction time: {end_prediction - start_prediction:1f} s")
@@ -72,6 +74,7 @@ def train_model(use_smote=True, chosen_fold_number=None):
             best_fold_number = fold_number
             best_y_test = y_test
             best_y_pred = y_pred
+            best_y_probability = y_probability
 
     print("\nAll fold accuracies: ", accuracies)
     print("Mean accuracy: ", np.mean(accuracies))
@@ -90,6 +93,7 @@ def train_model(use_smote=True, chosen_fold_number=None):
         "best_fold_number": best_fold_number,
         "best_y_test": best_y_test,
         "best_y_pred": best_y_pred,
+        "best_y_probability": best_y_probability,
         "Label_Encoder": Label_Encoder,
         "X_columns": X_columns
     }
@@ -101,12 +105,12 @@ if __name__ == "__main__":
     results = train_model(use_smote=True, chosen_fold_number=None)
 
     # Exporting
-    os.makedirs("XGBoost_Model (5 fold)", exist_ok=True)
+    os.makedirs("XGBoost_Model_SMOTE (5 fold)", exist_ok=True)
 
-    joblib.dump(results["best_model"], "XGBoost_Model (5 fold)/XGBoost_Model.pkl")
-    joblib.dump(results["best_scaler"], "XGBoost_Model (5 fold)/XGB_scaler.pkl")
-    joblib.dump(results["Label_Encoder"], "XGBoost_Model (5 fold)/XGB_Label_Encoder.pkl")
-    joblib.dump(results["X_columns"], "XGBoost_Model (5 fold)/XGB_X_columns.pkl")
+    joblib.dump(results["best_model"], "XGBoost_Model_SMOTE (5 fold)/XGBoost_Model_SMOTE.pkl")
+    joblib.dump(results["best_scaler"], "XGBoost_Model_SMOTE (5 fold)/XGBS_scaler.pkl")
+    joblib.dump(results["Label_Encoder"], "XGBoost_Model_SMOTE (5 fold)/XGBS_Label_Encoder.pkl")
+    joblib.dump(results["X_columns"], "XGBoost_Model_SMOTE (5 fold)/XGBS_X_columns.pkl")
 
     print(f"\nBest model from fold {results['best_fold_number']} saved!")
 
@@ -149,8 +153,16 @@ if __name__ == "__main__":
     report_text.append(feature_importance.to_string(index=False))
     report_text.append("")
 
+    probability_df = pd.DataFrame(
+        results["best_y_probability"],
+        columns=results["Label_Encoder"].classes_
+    )
+    probability_df["true_class"] = results["Label_Encoder"].inverse_transform(results["best_y_test"])
+    probability_df["predicted_class"] = results["Label_Encoder"].inverse_transform(results["best_y_pred"])
+    probability_df["max_probability"] = np.max(results["best_y_probability"], axis=1)
+    probability_df.to_csv("XGBoost_Model_SMOTE (5 fold)/XGBS_probabilities.csv", index=False)
 
-    with open("XGBoost_Model (5 fold)/XGB_metrics.txt", "w", encoding="utf-8") as f:
+    with open("XGBoost_Model_SMOTE (5 fold)/XGBS_metrics.txt", "w", encoding="utf-8") as f:
         f.write("\n".join(report_text))
 
     end_total = time.perf_counter()

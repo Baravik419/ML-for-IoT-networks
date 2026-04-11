@@ -1,0 +1,33 @@
+/Users/ervinborkovski/PycharmProjects/IDS-for-IoT-networks/.venv/bin/python /Users/ervinborkovski/PycharmProjects/IDS-for-IoT-networks/xgboost_model.py
+/Users/ervinborkovski/PycharmProjects/IDS-for-IoT-networks/data_preprocessing.py:35: DtypeWarning: Columns (0: src_bytes) have mixed types. Specify dtype option on import or set low_memory=False.
+  IoT_network_data = pd.read_csv("IoT_network_data.csv")
+Total data preparation: 63.099555 s
+Total preprocessing: 63.291154 s
+Total folds generation: 25.488463 s
+Total folds generation and balancing: 88.779680 s
+[20:14:00] INFO: /Users/runner/work/xgboost/xgboost/src/data/iterative_dmatrix.cc:56: Finished constructing the `IterativeDMatrix`: (2717013, 44, 119548572).
+Fold 1 learning time: 84.088622 s
+Fold 1 prediction time: 2.700726 s
+[20:15:27] INFO: /Users/runner/work/xgboost/xgboost/src/data/iterative_dmatrix.cc:56: Finished constructing the `IterativeDMatrix`: (2717013, 44, 119548572).
+Fold 2 learning time: 84.879269 s
+Fold 2 prediction time: 2.454791 s
+[20:16:54] INFO: /Users/runner/work/xgboost/xgboost/src/data/iterative_dmatrix.cc:56: Finished constructing the `IterativeDMatrix`: (2717014, 44, 119548616).
+Fold 3 learning time: 84.446557 s
+Fold 3 prediction time: 2.452356 s
+[20:18:21] INFO: /Users/runner/work/xgboost/xgboost/src/data/iterative_dmatrix.cc:56: Finished constructing the `IterativeDMatrix`: (2717014, 44, 119548616).
+Fold 4 learning time: 85.882333 s
+Fold 4 prediction time: 2.439995 s
+[20:19:49] INFO: /Users/runner/work/xgboost/xgboost/src/data/iterative_dmatrix.cc:56: Finished constructing the `IterativeDMatrix`: (2717014, 44, 119548616).
+Fold 5 learning time: 88.856107 s
+Fold 5 prediction time: 2.633706 s
+
+All fold accuracies:  [0.9999955833900132, 0.9999970555933421, 0.9999867501505331, 0.999995583383511, 0.9999896945615256]
+Mean accuracy:  0.999992933415785
+Best accuracy:  0.9999970555933421
+Best fold number:  2
+Total training time: 529.755234 s
+
+Best model from fold 2 saved!
+Total code running time: 535.621317 s
+
+Process finished with exit code 0
