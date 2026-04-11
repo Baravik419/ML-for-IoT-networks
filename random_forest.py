@@ -1,12 +1,17 @@
 import os
 import numpy as np
+import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, balanced_accuracy_score, classification_report, confusion_matrix
 import joblib
+import time
 
-from data_manipulation import generate_folds
+from data_preprocessing import generate_folds
 
-def train_model(use_smote=True):
+def train_model(use_smote=True, chosen_fold_number=None):
+
+    start_total = time.perf_counter()
+
     folds, Label_Encoder, X_columns = generate_folds(use_smote=use_smote)
 
     accuracies = []
@@ -15,44 +20,54 @@ def train_model(use_smote=True):
     best_model = None
     best_scaler = None
     best_fold_number = None
+    best_y_test = None
+    best_y_pred = None
 
-    chosen_fold_number = 2
-    chosen_fold = None
+    if chosen_fold_number is None:
+        folds_to_run = folds
+    else:
+        folds_to_run = [fold for fold in folds if fold["fold_number"] == chosen_fold_number]
 
-    for fold in folds:
-        if fold["fold_number"] == chosen_fold_number:
-            chosen_fold = fold
-            break
+        if not folds_to_run:
+            raise ValueError(f"Fold number {chosen_fold_number} not found.")
 
-    if chosen_fold is None:
-        raise ValueError("Chosen fold was not found.")
+    for fold in folds_to_run:
+        fold_number = fold["fold_number"]
+        X_train = fold["X_train"]
+        y_train = fold["y_train"]
+        X_test = fold["X_test"]
+        y_test = fold["y_test"]
+        scaler = fold["scaler"]
 
-    fold_number = chosen_fold["fold_number"]
-    X_train = chosen_fold["X_train"]
-    y_train = chosen_fold["y_train"]
-    X_test = chosen_fold["X_test"]
-    y_test = chosen_fold["y_test"]
-    scaler = chosen_fold["scaler"]
+        start_learning = time.perf_counter()
+        Random_Forest_Model = RandomForestClassifier(random_state=42, verbose=1)
+        Random_Forest_Model.fit(X_train, y_train) # Starting to learn
+        end_learning = time.perf_counter()
+        print(f"Fold {fold_number} learning time: {end_learning - start_learning:1f} s")
 
-    Random_Forest_Model = RandomForestClassifier(random_state=42, verbose=1)
-    Random_Forest_Model.fit(X_train, y_train) # Starting to learn
+        start_prediction = time.perf_counter()
+        y_pred = Random_Forest_Model.predict(X_test) # Creates prognosis
+        accuracy = accuracy_score(y_test, y_pred)
+        end_prediction = time.perf_counter()
+        print(f"Fold {fold_number} prediction time: {end_prediction - start_prediction:1f} s")
 
-    y_pred = Random_Forest_Model.predict(X_test) # Creates prognosis
-    accuracy = accuracy_score(y_test, y_pred)
-    accuracies.append(accuracy)
+        accuracies.append(accuracy)
 
-    if accuracy > best_accuracy:
-        best_accuracy = accuracy
-        best_model = Random_Forest_Model
-        best_scaler = scaler
-        best_fold_number = fold_number
-        best_y_test = y_test
-        best_y_pred = y_pred
+        if accuracy > best_accuracy:
+            best_accuracy = accuracy
+            best_model = Random_Forest_Model
+            best_scaler = scaler
+            best_fold_number = fold_number
+            best_y_test = y_test
+            best_y_pred = y_pred
 
     print("\nAll fold accuracies: ", accuracies)
     print("Mean accuracy: ", np.mean(accuracies))
     print("Best accuracy: ", best_accuracy)
     print("Best fold number: ", best_fold_number)
+
+    end_total = time.perf_counter()
+    print(f"Total training time: {end_total - start_total:1f} s")
 
     return {
         "accuracies": accuracies,
@@ -68,16 +83,18 @@ def train_model(use_smote=True):
     }
 
 if __name__ == "__main__":
-    results = train_model(use_smote=True)
+
+    start_total = time.perf_counter()
+
+    results = train_model(use_smote=True, chosen_fold_number=None)
 
     # Exporting
+    os.makedirs("Random_Forest_SMOTE (5 fold)", exist_ok=True)
 
-    os.makedirs("Random_Forest_SMOTE", exist_ok=True)
-
-    joblib.dump(results["best_model"], "Random_Forest_SMOTE/Random_Forest_Model_SMOTE.pkl")
-    joblib.dump(results["best_scaler"], "Random_Forest_SMOTE/RFMS_scaler.pkl")
-    joblib.dump(results["Label_Encoder"], "Random_Forest_SMOTE/RFMS_Label_Encoder.pkl")
-    joblib.dump(results["X_columns"], "Random_Forest_SMOTE/RFMS_X_columns.pkl")
+    joblib.dump(results["best_model"], "Random_Forest_SMOTE (5 fold)/Random_Forest_Model_SMOTE.pkl")
+    joblib.dump(results["best_scaler"], "Random_Forest_SMOTE (5 fold)/RFMS_scaler.pkl")
+    joblib.dump(results["Label_Encoder"], "Random_Forest_SMOTE (5 fold)/RFMS_Label_Encoder.pkl")
+    joblib.dump(results["X_columns"], "Random_Forest_SMOTE (5 fold)/RFMS_X_columns.pkl")
 
     print(f"\nBest model from fold {results['best_fold_number']} saved!")
 
@@ -112,5 +129,17 @@ if __name__ == "__main__":
     report_text.append(str(confusion_matrix(results["best_y_test"], results["best_y_pred"])))
     report_text.append("")
 
-    with open("Random_Forest_SMOTE/RFMS_metrics.txt", "w", encoding="utf-8") as f:
+    report_text.append("Feature importance:")
+    feature_importance = pd.DataFrame({
+        "feature": results["X_columns"],
+        "importance": results["best_model"].feature_importances_
+    }).sort_values("importance", ascending=False)
+    report_text.append(feature_importance.to_string(index=False))
+    report_text.append("")
+
+
+    with open("Random_Forest_SMOTE (5 fold)/RFMS_metrics.txt", "w", encoding="utf-8") as f:
         f.write("\n".join(report_text))
+
+    end_total = time.perf_counter()
+    print(f"Total code running time: {end_total - start_total:1f} s")
