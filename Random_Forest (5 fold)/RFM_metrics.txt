@@ -1,15 +1,15 @@
-Best fold: 3
-Best accuracy: 0.999993
-Mean accuracy: 0.999989
+Best fold: 4
+Best accuracy: 0.999996
+Mean accuracy: 0.999991
 
 All fold accuracies:
-Fold 1: 0.999991
-Fold 2: 0.999982
-Fold 3: 0.999993
-Fold 4: 0.999987
-Fold 5: 0.999990
+Fold 1: 0.999994
+Fold 2: 0.999988
+Fold 3: 0.999991
+Fold 4: 0.999996
+Fold 5: 0.999985
 
-Balanced accuracy: 0.999961
+Balanced accuracy: 0.999975
 
 Classification report:
               precision    recall  f1-score   support
@@ -29,9 +29,9 @@ weighted avg       1.00      1.00      1.00    679253
 
 Confusion matrix:
 [[ 49995      0      0      0      0      0      0]
- [     0 348211      0      1      0      0      0]
+ [     0 348211      1      0      0      0      0]
  [     0      0  38270      0      0      0      0]
  [     0      0      0  50076      0      0      0]
- [     0      0      0      0 165871      0      1]
- [     1      0      0      2      0  11391      0]
+ [     0      0      0      0 165872      0      0]
+ [     1      0      0      1      0  11392      0]
  [     0      0      0      0      0      0  15434]]
