@@ -5,10 +5,10 @@ from data_manipulation import X_test_scaled, y_test
 
 # Random Forest Model with SMOTE
 
-RFMS = joblib.load("Random_Forest (1 fold)/Random_Forest_Model_SMOTE.pkl")
-RFMS_scaler = joblib.load("Random_Forest (1 fold)/RFMS_scaler.pkl")
-RFMS_Label_Encoder = joblib.load("Random_Forest (1 fold)/RFMS_Label_Encoder.pkl")
-RFMS_X_columns = joblib.load("Random_Forest (1 fold)/RFMS_X_columns.pkl")
+RFMS = joblib.load("Random_Forest_SMOTE/Random_Forest_Model_SMOTE.pkl")
+RFMS_scaler = joblib.load("Random_Forest_SMOTE/RFMS_scaler.pkl")
+RFMS_Label_Encoder = joblib.load("Random_Forest_SMOTE/RFMS_Label_Encoder.pkl")
+RFMS_X_columns = joblib.load("Random_Forest_SMOTE/RFMS_X_columns.pkl")
 
 y_RFMS_pred = RFMS.predict(X_test_scaled)
 
