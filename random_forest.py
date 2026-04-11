@@ -86,7 +86,7 @@ if __name__ == "__main__":
 
     start_total = time.perf_counter()
 
-    results = train_model(use_smote=True, chosen_fold_number=3)
+    results = train_model(use_smote=True, chosen_fold_number=None)
 
     # Exporting
     os.makedirs("Random_Forest_SMOTE (5 fold)", exist_ok=True)
