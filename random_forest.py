@@ -86,17 +86,17 @@ if __name__ == "__main__":
 
     start_total = time.perf_counter()
 
-    results = train_model(use_smote=False, chosen_fold_number=1)
+    results = train_model(use_smote=True, chosen_fold_number=None)
 
     # Exporting
-    os.makedirs("Random_Forest (1 fold)", exist_ok=True)
+    os.makedirs("Random_Forest_SMOTE (5 fold)", exist_ok=True)
 
-    joblib.dump(results["best_model"], "Random_Forest (1 fold)/Random_Forest_Model_SMOTE.pkl")
-    joblib.dump(results["best_scaler"], "Random_Forest (1 fold)/RFMS_scaler.pkl")
-    joblib.dump(results["Label_Encoder"], "Random_Forest (1 fold)/RFMS_Label_Encoder.pkl")
-    joblib.dump(results["X_columns"], "Random_Forest (1 fold)/RFMS_X_columns.pkl")
+    joblib.dump(results["best_model"], "Random_Forest_SMOTE (5 fold)/Random_Forest_Model_SMOTE.pkl")
+    joblib.dump(results["best_scaler"], "Random_Forest_SMOTE (5 fold)/RFMS_scaler.pkl")
+    joblib.dump(results["Label_Encoder"], "Random_Forest_SMOTE (5 fold)/RFMS_Label_Encoder.pkl")
+    joblib.dump(results["X_columns"], "Random_Forest_SMOTE (5 fold)/RFMS_X_columns.pkl")
 
-    print(f"\n Best model from fold {results['best_fold_number']} saved!")
+    print(f"\nBest model from fold {results['best_fold_number']} saved!")
 
     report_text = []
     report_text.append(f"Best fold: {results['best_fold_number']}")
@@ -138,7 +138,7 @@ if __name__ == "__main__":
     report_text.append("")
 
 
-    with open("Random_Forest (1 fold)/RFMS_metrics.txt", "w", encoding="utf-8") as f:
+    with open("Random_Forest_SMOTE (5 fold)/RFMS_metrics.txt", "w", encoding="utf-8") as f:
         f.write("\n".join(report_text))
 
     end_total = time.perf_counter()
