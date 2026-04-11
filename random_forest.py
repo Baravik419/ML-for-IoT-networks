@@ -79,7 +79,7 @@ if __name__ == "__main__":
     joblib.dump(results["Label_Encoder"], "Random_Forest_SMOTE/RFMS_Label_Encoder.pkl")
     joblib.dump(results["X_columns"], "Random_Forest_SMOTE/RFMS_X_columns.pkl")
 
-    print(f"\n Best model from fold {results['best_fold_number']} saved!")
+    print(f"\nBest model from fold {results['best_fold_number']} saved!")
 
     report_text = []
     report_text.append(f"Best fold: {results['best_fold_number']}")
