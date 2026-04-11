@@ -1,0 +1,196 @@
+/Users/ervinborkovski/PycharmProjects/IDS-for-IoT-networks/.venv/bin/python /Users/ervinborkovski/PycharmProjects/IDS-for-IoT-networks/light_gbm.py
+/Users/ervinborkovski/PycharmProjects/IDS-for-IoT-networks/data_preprocessing.py:35: DtypeWarning: Columns (0: src_bytes) have mixed types. Specify dtype option on import or set low_memory=False.
+  IoT_network_data = pd.read_csv("IoT_network_data.csv")
+Total data preparation: 62.662080 s
+Total preprocessing: 62.841997 s
+Folds generation: 0.000028 s
+type
+0     199980
+1    1392848
+2     153081
+3     200303
+4     663488
+5      45576
+6      61737
+Name: count, dtype: int64
+type
+0    1392848
+1    1392848
+2    1392848
+3    1392848
+4    1392848
+5    1392848
+6    1392848
+Name: count, dtype: int64
+SMOTE: 562.808023 s
+type
+0     199980
+1    1392848
+2     153082
+3     200303
+4     663487
+5      45576
+6      61737
+Name: count, dtype: int64
+type
+0    1392848
+1    1392848
+2    1392848
+3    1392848
+4    1392848
+5    1392848
+6    1392848
+Name: count, dtype: int64
+SMOTE: 590.724724 s
+type
+0     199980
+1    1392848
+2     153082
+3     200303
+4     663487
+5      45576
+6      61738
+Name: count, dtype: int64
+type
+0    1392848
+1    1392848
+2    1392848
+3    1392848
+4    1392848
+5    1392848
+6    1392848
+Name: count, dtype: int64
+SMOTE: 595.932345 s
+type
+0     199980
+1    1392848
+2     153082
+3     200303
+4     663487
+5      45576
+6      61738
+Name: count, dtype: int64
+type
+0    1392848
+1    1392848
+2    1392848
+3    1392848
+4    1392848
+5    1392848
+6    1392848
+Name: count, dtype: int64
+SMOTE: 578.356304 s
+type
+0     199980
+1    1392848
+2     153081
+3     200304
+4     663487
+5      45576
+6      61738
+Name: count, dtype: int64
+type
+0    1392848
+1    1392848
+2    1392848
+3    1392848
+4    1392848
+5    1392848
+6    1392848
+Name: count, dtype: int64
+SMOTE: 608.395873 s
+Total folds generation and balancing: 3028.696008 s
+[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.327031 seconds.
+You can set `force_row_wise=true` to remove the overhead.
+And if memory is not enough, you can set `force_col_wise=true`.
+[LightGBM] [Info] Total Bins 3922
+[LightGBM] [Info] Number of data points in the train set: 9749936, number of used features: 44
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+/Users/ervinborkovski/PycharmProjects/IDS-for-IoT-networks/.venv/lib/python3.14/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+Fold 1 learning time: 80.241424 s
+Fold 1 prediction time: 3.955156 s
+[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.305535 seconds.
+You can set `force_row_wise=true` to remove the overhead.
+And if memory is not enough, you can set `force_col_wise=true`.
+[LightGBM] [Info] Total Bins 3974
+[LightGBM] [Info] Number of data points in the train set: 9749936, number of used features: 44
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Info] Start training from score -1.945910
+Fold 2 learning time: 80.352307 s
+/Users/ervinborkovski/PycharmProjects/IDS-for-IoT-networks/.venv/lib/python3.14/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+Fold 2 prediction time: 4.322510 s
+[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.273284 seconds.
+You can set `force_row_wise=true` to remove the overhead.
+And if memory is not enough, you can set `force_col_wise=true`.
+[LightGBM] [Info] Total Bins 3942
+[LightGBM] [Info] Number of data points in the train set: 9749936, number of used features: 44
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+Fold 3 learning time: 80.517823 s
+/Users/ervinborkovski/PycharmProjects/IDS-for-IoT-networks/.venv/lib/python3.14/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+Fold 3 prediction time: 4.145296 s
+[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.296568 seconds.
+You can set `force_row_wise=true` to remove the overhead.
+And if memory is not enough, you can set `force_col_wise=true`.
+[LightGBM] [Info] Total Bins 3933
+[LightGBM] [Info] Number of data points in the train set: 9749936, number of used features: 43
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+/Users/ervinborkovski/PycharmProjects/IDS-for-IoT-networks/.venv/lib/python3.14/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+Fold 4 learning time: 80.403573 s
+Fold 4 prediction time: 4.011521 s
+[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.357643 seconds.
+You can set `force_row_wise=true` to remove the overhead.
+And if memory is not enough, you can set `force_col_wise=true`.
+[LightGBM] [Info] Total Bins 3959
+[LightGBM] [Info] Number of data points in the train set: 9749936, number of used features: 44
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Info] Start training from score -1.945910
+[LightGBM] [Info] Start training from score -1.945910
+Fold 5 learning time: 71.805501 s
+/Users/ervinborkovski/PycharmProjects/IDS-for-IoT-networks/.venv/lib/python3.14/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+Fold 5 prediction time: 4.175721 s
+
+All fold accuracies:  [0.9999896945766974, 0.9999926389833552, 0.9999867501505331, 0.9999941111780146, 0.9999926389725183]
+Mean accuracy:  0.9999911667722238
+Best accuracy:  0.9999941111780146
+Best fold number:  4
+Total training time: 3442.990560 s
+
+Best model from fold 4 saved!
+Total code running time: 3445.776469 s
+
+Process finished with exit code 0

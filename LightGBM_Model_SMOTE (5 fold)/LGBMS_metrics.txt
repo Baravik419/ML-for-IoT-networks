@@ -1,0 +1,84 @@
+Best fold: 4
+Best accuracy: 0.999994
+Mean accuracy: 0.999991
+
+All fold accuracies:
+Fold 1: 0.999990
+Fold 2: 0.999993
+Fold 3: 0.999987
+Fold 4: 0.999994
+Fold 5: 0.999993
+
+Balanced accuracy: 0.999969
+
+Classification report:
+              precision    recall  f1-score   support
+
+    backdoor       1.00      1.00      1.00     49995
+        ddos       1.00      1.00      1.00    348212
+   injection       1.00      1.00      1.00     38270
+      normal       1.00      1.00      1.00     50076
+    password       1.00      1.00      1.00    165872
+  ransomware       1.00      1.00      1.00     11394
+         xss       1.00      1.00      1.00     15434
+
+    accuracy                           1.00    679253
+   macro avg       1.00      1.00      1.00    679253
+weighted avg       1.00      1.00      1.00    679253
+
+
+Confusion matrix:
+[[ 49993      0      0      0      0      2      0]
+ [     0 348212      0      0      0      0      0]
+ [     0      0  38270      0      0      0      0]
+ [     0      0      0  50076      0      0      0]
+ [     0      0      0      0 165872      0      0]
+ [     1      0      0      1      0  11392      0]
+ [     0      0      0      0      0      0  15434]]
+
+Feature importance:
+               feature  importance
+                    ts        3378
+                src_ip        3371
+              src_port        2838
+                dst_ip        2535
+              dst_port        1865
+              duration        1783
+            conn_state        1008
+             src_bytes         810
+          src_ip_bytes         637
+              dst_pkts         498
+              src_pkts         427
+             dst_bytes         355
+                 proto         330
+          dst_ip_bytes         263
+          missed_bytes         225
+               service         197
+             dns_qtype         196
+             dns_query         176
+            weird_name          68
+            dns_qclass          12
+          dns_rejected           9
+                dns_RA           4
+                dns_AA           3
+             dns_rcode           1
+                dns_RD           1
+           ssl_version           0
+           ssl_resumed           0
+            ssl_cipher           0
+       ssl_established           0
+           ssl_subject           0
+      http_trans_depth           0
+            ssl_issuer           0
+              http_uri           0
+         http_referrer           0
+          http_version           0
+           http_method           0
+ http_request_body_len           0
+http_response_body_len           0
+       http_user_agent           0
+      http_status_code           0
+  http_orig_mime_types           0
+  http_resp_mime_types           0
+            weird_addl           0
+          weird_notice           0
