@@ -1,48 +1,47 @@
-/usr/local/bin/python3.14 /Users/ervinborkovski/Library/CloudStorage/OneDrive-VilniausGediminotechnikosuniversitetas/University/Baigiamasis darbas/Realizacija/random_forest.py
-/Users/ervinborkovski/Library/CloudStorage/OneDrive-VilniausGediminotechnikosuniversitetas/University/Baigiamasis darbas/Realizacija/data_preprocessing.py:35: DtypeWarning: Columns (0: src_bytes) have mixed types. Specify dtype option on import or set low_memory=False.
+/Users/ervinborkovski/PycharmProjects/IDS-for-IoT-networks/.venv/bin/python /Users/ervinborkovski/PycharmProjects/IDS-for-IoT-networks/random_forest.py
+/Users/ervinborkovski/PycharmProjects/IDS-for-IoT-networks/data_preprocessing.py:35: DtypeWarning: Columns (0: src_bytes) have mixed types. Specify dtype option on import or set low_memory=False.
   IoT_network_data = pd.read_csv("IoT_network_data.csv")
-Total data preparation: 60.972638 s
-Total preprocessing: 61.156098 s
-Folds generation: 0.000019 s
-Total folds generation and balancing: 82.554997 s
+Total data preparation: 62.270252 s
+Total preprocessing: 62.449916 s
+Total folds generation and balancing: 85.163089 s
+[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed:  2.0min
+Fold 1 learning time: 241.623177 s
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:  4.0min finished
+[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed:    1.6s
+Fold 1 prediction time: 3.300143 s
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:    3.2s finished
+[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed:  2.0min
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:  4.3min finished
+Fold 2 learning time: 255.849393 s
+[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed:    1.6s
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:    3.4s finished
+Fold 2 prediction time: 3.488578 s
+[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed:  2.0min
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:  4.0min finished
+Fold 3 learning time: 242.599290 s
+[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed:    1.6s
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:    3.2s finished
+Fold 3 prediction time: 3.248341 s
 [Parallel(n_jobs=1)]: Done  49 tasks      | elapsed:  2.0min
 [Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:  4.1min finished
-Fold 1 learning time: 243.958586 s
-[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed:    1.7s
-[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:    3.3s finished
-Fold 1 prediction time: 3.397682 s
+Fold 4 learning time: 243.964718 s
+[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed:    1.5s
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:    3.0s finished
+Fold 4 prediction time: 3.041816 s
 [Parallel(n_jobs=1)]: Done  49 tasks      | elapsed:  2.0min
-[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:  4.0min finished
-Fold 2 learning time: 243.097696 s
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:  4.1min finished
+Fold 5 learning time: 245.597857 s
 [Parallel(n_jobs=1)]: Done  49 tasks      | elapsed:    1.6s
 [Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:    3.2s finished
-Fold 2 prediction time: 3.271171 s
-[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed:  1.9min
-[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:  4.0min finished
-Fold 3 learning time: 239.254214 s
-[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed:    1.5s
-[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:    3.1s finished
-Fold 3 prediction time: 3.220551 s
-[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed:  1.9min
-[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:  3.9min finished
-Fold 4 learning time: 234.124258 s
-[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed:    1.5s
-[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:    3.2s finished
-Fold 4 prediction time: 3.234269 s
-[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed:  1.9min
-[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:  3.9min finished
-Fold 5 learning time: 235.901956 s
-[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed:    1.6s
-[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:    3.2s finished
-Fold 5 prediction time: 3.254348 s
+Fold 5 prediction time: 3.298308 s
 
 All fold accuracies:  [0.9999941111866842, 0.9999882223733685, 0.999991166767022, 0.999995583383511, 0.9999852779450367]
 Mean accuracy:  0.9999908723311245
 Best accuracy:  0.999995583383511
 Best fold number:  4
-Total training time: 1295.444230 s
+Total training time: 1331.292245 s
 
 Best model from fold 4 saved!
-Total code running time: 1296.057629 s
+Total code running time: 1331.939225 s
 
 Process finished with exit code 0
