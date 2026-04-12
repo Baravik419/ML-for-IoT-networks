@@ -1,9 +1,8 @@
 import time
-
 import pandas as pd
 from imblearn.over_sampling import SMOTE
 from sklearn.model_selection import StratifiedKFold
-from sklearn.preprocessing import LabelEncoder, StandardScaler
+from sklearn.preprocessing import LabelEncoder, StandardScaler, OrdinalEncoder
 
 # IoT_network_data = pd.read_csv("IoT_network_data.csv")
 
@@ -29,6 +28,31 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 #
 # print(summary)
 
+#
+Integration_features = [
+    "ts",
+    "src_ip",
+    "src_port",
+    "dst_ip",
+    "dst_port",
+    "proto",
+    "service",
+    "duration",
+    "src_bytes",
+    "dst_bytes",
+    "src_pkts",
+    "dst_pkts",
+    "conn_state",
+]
+
+Categorical_Columns = [
+    "src_ip",
+    "dst_ip",
+    "proto",
+    "service",
+    "conn_state"
+]
+
 # Begging data preprocessing
 def prepare_data():
     start_total = time.perf_counter()
@@ -38,7 +62,7 @@ def prepare_data():
     IoT_network_data = IoT_network_data.drop(columns=["label", "uid"])
 
     # Separating features and targets
-    X = IoT_network_data.drop(columns=["type"])
+    X = IoT_network_data[Integration_features].copy()
     y = IoT_network_data["type"]
 
     #print(X.shape)
@@ -49,35 +73,40 @@ def prepare_data():
 
     X["src_bytes"] = pd.to_numeric(X["src_bytes"], errors="coerce")
 
-    Categorical_Columns = X.select_dtypes(include=["string"]).columns
-
     for column in Categorical_Columns:
         X[column] = X[column].astype(str).str.strip().str.lower()
 
-    # Label encoding
-    for column in Categorical_Columns:
-        X[column] = X[column].astype("category").cat.codes
+    # Ordinal encoding
+    Ordinal_Encoder = OrdinalEncoder(
+        handle_unknown="use_encoded_value",
+        unknown_value=-1
+    )
+
+    X[Categorical_Columns] = Ordinal_Encoder.fit_transform(X[Categorical_Columns])
+
+    # for col in X.columns:
+    #     print(col, X[col].dtype)
 
     # NaN to 0
     X = X.fillna(0)
-    X.to_csv("X.csv", index=False)
+    X.to_csv("X_integration.csv", index=False)
 
     Label_Encoder = LabelEncoder()
     y = pd.Series(Label_Encoder.fit_transform(y), name="type")
-    y.to_csv("y.csv", index=False)
+    y.to_csv("y_integration.csv", index=False)
 
     end_total = time.perf_counter()
 
     print(f"Total data preparation: {end_total - start_total:1f} s")
 
-    return X, y, Label_Encoder
+    return X, y, Label_Encoder, Ordinal_Encoder
 
 def generate_folds(use_smote=True, chosen_fold_number=None):
 
     start_total = time.perf_counter()
 
     start_preprocessing = time.perf_counter()
-    X, y, Label_Encoder = prepare_data()
+    X, y, Label_Encoder, Ordinal_Encoder = prepare_data()
     end_preprocessing = time.perf_counter()
 
     print(f"Total preprocessing: {end_preprocessing - start_preprocessing:1f} s")
@@ -136,4 +165,4 @@ def generate_folds(use_smote=True, chosen_fold_number=None):
 
     end_total = time.perf_counter()
     print(f"Total folds generation and balancing: {end_total - start_total:1f} s")
-    return folds, Label_Encoder, X.columns.tolist()
+    return folds, Label_Encoder, Ordinal_Encoder, X.columns.tolist()
