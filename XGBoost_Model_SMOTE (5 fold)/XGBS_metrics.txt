@@ -1,0 +1,84 @@
+Best fold: 1
+Best accuracy: 0.999996
+Mean accuracy: 0.999994
+
+All fold accuracies:
+Fold 1: 0.999996
+Fold 2: 0.999990
+Fold 3: 0.999996
+Fold 4: 0.999994
+Fold 5: 0.999996
+
+Balanced accuracy: 0.999982
+
+Classification report:
+              precision    recall  f1-score   support
+
+    backdoor       1.00      1.00      1.00     49995
+        ddos       1.00      1.00      1.00    348212
+   injection       1.00      1.00      1.00     38271
+      normal       1.00      1.00      1.00     50076
+    password       1.00      1.00      1.00    165871
+  ransomware       1.00      1.00      1.00     11394
+         xss       1.00      1.00      1.00     15435
+
+    accuracy                           1.00    679254
+   macro avg       1.00      1.00      1.00    679254
+weighted avg       1.00      1.00      1.00    679254
+
+
+Confusion matrix:
+[[ 49993      0      0      1      0      1      0]
+ [     0 348212      0      0      0      0      0]
+ [     0      0  38271      0      0      0      0]
+ [     0      0      0  50076      0      0      0]
+ [     0      0      0      0 165871      0      0]
+ [     1      0      0      0      0  11393      0]
+ [     0      0      0      0      0      0  15435]]
+
+Feature importance:
+               feature  importance
+          dns_rejected    0.196230
+                    ts    0.190004
+             dns_query    0.129737
+              duration    0.085204
+             src_bytes    0.055698
+                src_ip    0.055261
+                 proto    0.043721
+            conn_state    0.041296
+             dst_bytes    0.032329
+                dns_AA    0.030836
+                dst_ip    0.024932
+          src_ip_bytes    0.023903
+              src_pkts    0.021349
+              dst_pkts    0.018871
+          dst_ip_bytes    0.013859
+              dst_port    0.008676
+             dns_qtype    0.008667
+                dns_RD    0.006615
+      http_status_code    0.005946
+              src_port    0.002359
+               service    0.001100
+             dns_rcode    0.001022
+            dns_qclass    0.000555
+       ssl_established    0.000532
+                dns_RA    0.000419
+          missed_bytes    0.000220
+      http_trans_depth    0.000198
+           ssl_resumed    0.000162
+       http_user_agent    0.000106
+          weird_notice    0.000052
+            weird_name    0.000050
+           ssl_version    0.000035
+           http_method    0.000029
+              http_uri    0.000029
+            ssl_cipher    0.000000
+            ssl_issuer    0.000000
+ http_request_body_len    0.000000
+          http_version    0.000000
+         http_referrer    0.000000
+           ssl_subject    0.000000
+  http_orig_mime_types    0.000000
+http_response_body_len    0.000000
+  http_resp_mime_types    0.000000
+            weird_addl    0.000000

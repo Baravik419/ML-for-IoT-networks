@@ -1,0 +1,142 @@
+/Users/ervinborkovski/PycharmProjects/IDS-for-IoT-networks/.venv/bin/python /Users/ervinborkovski/PycharmProjects/IDS-for-IoT-networks/random_forest.py
+/Users/ervinborkovski/PycharmProjects/IDS-for-IoT-networks/data_preprocessing.py:35: DtypeWarning: Columns (0: src_bytes) have mixed types. Specify dtype option on import or set low_memory=False.
+  IoT_network_data = pd.read_csv("IoT_network_data.csv")
+Total data preparation: 62.347218 s
+Total preprocessing: 62.525552 s
+type
+0     199980
+1    1392848
+2     153081
+3     200303
+4     663488
+5      45576
+6      61737
+Name: count, dtype: int64
+type
+0    1392848
+1    1392848
+2    1392848
+3    1392848
+4    1392848
+5    1392848
+6    1392848
+Name: count, dtype: int64
+SMOTE: 564.395048 s
+type
+0     199980
+1    1392848
+2     153082
+3     200303
+4     663487
+5      45576
+6      61737
+Name: count, dtype: int64
+type
+0    1392848
+1    1392848
+2    1392848
+3    1392848
+4    1392848
+5    1392848
+6    1392848
+Name: count, dtype: int64
+SMOTE: 582.213057 s
+type
+0     199980
+1    1392848
+2     153082
+3     200303
+4     663487
+5      45576
+6      61738
+Name: count, dtype: int64
+type
+0    1392848
+1    1392848
+2    1392848
+3    1392848
+4    1392848
+5    1392848
+6    1392848
+Name: count, dtype: int64
+SMOTE: 587.094800 s
+type
+0     199980
+1    1392848
+2     153082
+3     200303
+4     663487
+5      45576
+6      61738
+Name: count, dtype: int64
+type
+0    1392848
+1    1392848
+2    1392848
+3    1392848
+4    1392848
+5    1392848
+6    1392848
+Name: count, dtype: int64
+SMOTE: 586.538417 s
+type
+0     199980
+1    1392848
+2     153081
+3     200304
+4     663487
+5      45576
+6      61738
+Name: count, dtype: int64
+type
+0    1392848
+1    1392848
+2    1392848
+3    1392848
+4    1392848
+5    1392848
+6    1392848
+Name: count, dtype: int64
+SMOTE: 616.028116 s
+Total folds generation and balancing: 3023.431541 s
+[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed: 12.9min
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed: 26.8min finished
+Fold 1 learning time: 1618.192347 s
+[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed:    1.7s
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:    3.6s finished
+Fold 1 prediction time: 3.901377 s
+[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed: 12.7min
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed: 26.5min finished
+Fold 2 learning time: 1599.166999 s
+[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed:    1.8s
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:    3.6s finished
+Fold 2 prediction time: 3.763408 s
+[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed: 13.3min
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed: 27.1min finished
+Fold 3 learning time: 1636.635783 s
+[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed:    1.8s
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:    3.7s finished
+Fold 3 prediction time: 3.949896 s
+[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed: 13.2min
+Fold 4 learning time: 1602.803201 s
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed: 26.6min finished
+[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed:    2.1s
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:    4.2s finished
+Fold 4 prediction time: 4.493353 s
+[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed: 13.0min
+Fold 5 learning time: 1610.894358 s
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed: 26.7min finished
+[Parallel(n_jobs=1)]: Done  49 tasks      | elapsed:    1.8s
+Fold 5 prediction time: 3.982815 s
+
+All fold accuracies:  [0.9999911667800263, 0.9999823335600526, 0.9999926389725183, 0.9999867501505331, 0.9999896945615256]
+Mean accuracy:  0.9999885168049312
+Best accuracy:  0.9999926389725183
+Best fold number:  3
+Total training time: 11111.459068 s
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:    3.6s finished
+
+Best model from fold 3 saved!
+Total code running time: 11113.477139 s
+
+Process finished with exit code 0

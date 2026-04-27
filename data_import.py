@@ -27,7 +27,6 @@ IoT_data = pd.concat([Fridge, Garage_Door, Gps_Tracker, Modbus, Motion_Light, Th
 #print(IoT_data.head())
 
 # Converting date and time to timestamp
-
 IoT_data["ts"] = (
     pd.to_datetime(
     IoT_data["date"].str.strip() + " " + IoT_data["time"].str.strip(),

@@ -35,3 +35,50 @@ Confusion matrix:
  [     0      0      0      0 165871      0      1]
  [     1      0      0      2      0  11391      0]
  [     0      0      0      0      0      0  15434]]
+
+Feature importance:
+               feature   importance
+                    ts 2.612827e-01
+                src_ip 1.589283e-01
+                dst_ip 7.744527e-02
+          src_ip_bytes 7.510374e-02
+            conn_state 6.727046e-02
+          dst_ip_bytes 5.516648e-02
+              dst_port 5.252791e-02
+              dst_pkts 5.191177e-02
+              src_pkts 4.810494e-02
+              src_port 2.995317e-02
+              duration 2.692129e-02
+               service 2.551774e-02
+                 proto 1.762234e-02
+             dst_bytes 1.185770e-02
+             dns_query 7.015301e-03
+                dns_RA 5.839063e-03
+             src_bytes 5.594228e-03
+          dns_rejected 5.490996e-03
+                dns_RD 4.615166e-03
+             dns_qtype 3.373105e-03
+                dns_AA 2.699426e-03
+            dns_qclass 2.543877e-03
+             dns_rcode 2.202406e-03
+          missed_bytes 6.710328e-04
+           ssl_resumed 4.460079e-05
+            weird_name 4.021764e-05
+      http_status_code 3.625692e-05
+              http_uri 3.346240e-05
+       ssl_established 3.029933e-05
+            ssl_cipher 2.856321e-05
+           http_method 2.665562e-05
+       http_user_agent 2.086534e-05
+           ssl_version 1.565046e-05
+          http_version 1.217281e-05
+            ssl_issuer 1.095166e-05
+          weird_notice 1.042927e-05
+http_response_body_len 8.087508e-06
+      http_trans_depth 7.199721e-06
+           ssl_subject 5.768176e-06
+  http_resp_mime_types 5.184149e-06
+ http_request_body_len 3.122916e-06
+            weird_addl 1.521120e-06
+  http_orig_mime_types 4.527775e-07
+         http_referrer 1.372166e-07
