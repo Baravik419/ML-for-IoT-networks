@@ -102,7 +102,7 @@ if __name__ == "__main__":
 
     start_total = time.perf_counter()
 
-    results = train_model(use_smote=True, chosen_fold_number=None)
+    results = train_model(use_smote=False, chosen_fold_number=None)
 
     # Exporting
     os.makedirs("XGBoost_Model_SMOTE (5 fold)", exist_ok=True)

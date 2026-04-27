@@ -29,7 +29,7 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 #
 # print(summary)
 
-# Begging data preprocessing
+# Beginning data preprocessing
 def prepare_data():
     start_total = time.perf_counter()
     IoT_network_data = pd.read_csv("IoT_network_data.csv")
